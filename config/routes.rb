@@ -6,6 +6,7 @@ Ploud::Application.routes.draw do
   resources :projects do
     resources :contexts do
       resources :task_statuses
+      resources :tasks
     end
   end
 

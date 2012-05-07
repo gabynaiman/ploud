@@ -13,7 +13,7 @@
     = f.label :description
     = f.text_field :description
   .field
-    = f.label :status
-    = f.select :status, ProjectStatus.to_select_list
+    = f.label :project_status
+    = f.select :project_status, ProjectStatus.to_select_list
   .actions
     = f.submit 'Save'

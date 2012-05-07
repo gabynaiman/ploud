@@ -1,0 +1,7 @@
+%h1 Editing task
+
+= render 'form'
+
+= link_to 'Show', [@context.project, @context, @task]
+\|
+= link_to 'Back', project_context_tasks_path(@context.project, @context)

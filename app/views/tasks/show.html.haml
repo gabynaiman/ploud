@@ -1,0 +1,13 @@
+%p
+  %b Name:
+  = @task.name
+%p
+  %b Description:
+  = @task.description
+%p
+  %b Task status:
+  = @task.task_status.name
+
+= link_to 'Edit', edit_project_context_task_path(@context.project, @context, @task)
+\|
+= link_to 'Back', project_context_tasks_path(@context.project, @context)

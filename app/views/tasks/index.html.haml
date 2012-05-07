@@ -1,0 +1,23 @@
+%h1 Listing tasks
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th Task status
+    %th
+    %th
+    %th
+
+  - @tasks.each do |task|
+    %tr
+      %td= task.name
+      %td= task.description
+      %td= task.task_status.name
+      %td= link_to 'Show', [@context.project, @context, task]
+      %td= link_to 'Edit', edit_project_context_task_path(@context.project, @context, task)
+      %td= link_to 'Destroy', [@context.project, @context, task], :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Task', new_project_context_task_path

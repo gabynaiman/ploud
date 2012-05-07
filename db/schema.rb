@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507163109) do
+ActiveRecord::Schema.define(:version => 20120507170337) do
 
   create_table "contexts", :force => true do |t|
     t.string   "name",       :null => false
-    t.integer  "project_id"
+    t.integer  "project_id", :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -23,21 +23,33 @@ ActiveRecord::Schema.define(:version => 20120507163109) do
   add_index "contexts", ["project_id"], :name => "index_contexts_on_project_id"
 
   create_table "projects", :force => true do |t|
-    t.string   "name",        :null => false
-    t.string   "description", :null => false
-    t.string   "status",      :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "name",           :null => false
+    t.text     "description"
+    t.string   "project_status", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "task_statuses", :force => true do |t|
     t.string   "name",       :null => false
-    t.integer  "context_id"
+    t.integer  "context_id", :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   add_index "task_statuses", ["context_id"], :name => "index_task_statuses_on_context_id"
+
+  create_table "tasks", :force => true do |t|
+    t.string   "name",           :null => false
+    t.text     "description"
+    t.integer  "context_id"
+    t.integer  "task_status_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "tasks", ["context_id"], :name => "index_tasks_on_context_id"
+  add_index "tasks", ["task_status_id"], :name => "index_tasks_on_task_status_id"
 
   create_table "users", :force => true do |t|
     t.string   "name",                   :default => "", :null => false

@@ -2,7 +2,7 @@ class CreateTaskStatuses < ActiveRecord::Migration
   def change
     create_table :task_statuses do |t|
       t.string :name, :null => false
-      t.references :context
+      t.references :context, :null => false
 
       t.timestamps
     end
