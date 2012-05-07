@@ -5,6 +5,8 @@ module ActsAsAuditable
     module ClassMethods
       def acts_as_auditable
         include InstanceMethods
+        before_create :set_creator
+        before_update :set_updater
       end
 
       def acts_as_audit_stamp
