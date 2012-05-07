@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(:version => 20120507170337) do
     t.integer  "project_id", :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "created_by", :null => false
+    t.integer  "updated_by", :null => false
   end
 
   add_index "contexts", ["project_id"], :name => "index_contexts_on_project_id"
@@ -28,6 +30,8 @@ ActiveRecord::Schema.define(:version => 20120507170337) do
     t.string   "project_status", :null => false
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "created_by",     :null => false
+    t.integer  "updated_by",     :null => false
   end
 
   create_table "task_statuses", :force => true do |t|
@@ -35,6 +39,8 @@ ActiveRecord::Schema.define(:version => 20120507170337) do
     t.integer  "context_id", :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "created_by", :null => false
+    t.integer  "updated_by", :null => false
   end
 
   add_index "task_statuses", ["context_id"], :name => "index_task_statuses_on_context_id"
@@ -46,6 +52,8 @@ ActiveRecord::Schema.define(:version => 20120507170337) do
     t.integer  "task_status_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "created_by",     :null => false
+    t.integer  "updated_by",     :null => false
   end
 
   add_index "tasks", ["context_id"], :name => "index_tasks_on_context_id"

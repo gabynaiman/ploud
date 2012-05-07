@@ -5,6 +5,7 @@ class CreateContexts < ActiveRecord::Migration
       t.references :project, :null => false
 
       t.timestamps
+      t.auditstamps
     end
     add_index :contexts, :project_id
   end
