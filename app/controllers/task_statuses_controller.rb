@@ -4,7 +4,7 @@ class TaskStatusesController < ApplicationController
   # GET /task_statuses
   # GET /task_statuses.json
   def index
-    @task_statuses = TaskStatus.all
+    @task_statuses = @context.task_statuses.search(params[:query]).result.order('LOWER(name)').page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

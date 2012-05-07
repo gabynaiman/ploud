@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = @context.tasks.search(params[:query]).result.order('LOWER(name)').page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
