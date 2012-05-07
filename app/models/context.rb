@@ -7,4 +7,6 @@ class Context < ActiveRecord::Base
 
   validates_presence_of :project
   validates_presence_of :name
+
+  acts_as_auditable
 end

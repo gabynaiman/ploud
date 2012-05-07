@@ -1,1 +1,1 @@
-require "#{Rails.root}/lib/audit_stamp"
+require "#{Rails.root}/lib/acts_as_auditable"

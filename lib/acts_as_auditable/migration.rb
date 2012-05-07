@@ -1,6 +1,6 @@
-module AuditStamp
+module ActsAsAuditable
 
-  module MgrationHelper
+  module Mgration
 
     def self.included(base) # :nodoc:
       base.send(:include, InstanceMethods)
