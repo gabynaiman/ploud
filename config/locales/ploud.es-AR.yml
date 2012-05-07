@@ -1,0 +1,8 @@
+es-AR:
+  activerecord:
+    constants:
+      project_statuses:
+        not_started: 'Sin comenzar'
+        on_going: 'En curso'
+        finalized: 'Finalizado'
+        cancelled: 'Cancelado'
