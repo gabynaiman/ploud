@@ -1,0 +1,7 @@
+%h1 Editing task_status
+
+= render 'form'
+
+= link_to 'Show', [@context.project, @context, @task_status]
+\|
+= link_to 'Back', project_context_task_statuses_path(@context.project, @context)

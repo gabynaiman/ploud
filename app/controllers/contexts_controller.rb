@@ -43,6 +43,7 @@ class ContextsController < ApplicationController
   # POST /contexts.json
   def create
     @context = Context.new(params[:context])
+    @context.project = @project
 
     respond_to do |format|
       if @context.save

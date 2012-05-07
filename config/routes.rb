@@ -4,7 +4,9 @@ Ploud::Application.routes.draw do
   root :to => 'home#index'
 
   resources :projects do
-    resources :contexts
+    resources :contexts do
+      resources :task_statuses
+    end
   end
 
 end

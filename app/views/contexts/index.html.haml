@@ -3,7 +3,7 @@
 %table
   %tr
     %th Name
-    %th Project
+    %th
     %th
     %th
     %th
@@ -11,10 +11,10 @@
   - @contexts.each do |context|
     %tr
       %td= context.name
-      %td= context.project
       %td= link_to 'Show', [@project, context]
       %td= link_to 'Edit', edit_project_context_path(@project, context)
       %td= link_to 'Destroy', [@project, context], :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Statuses', project_context_task_statuses_path(@project, context)
 
 %br
 
