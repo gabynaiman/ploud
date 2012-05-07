@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  has_many :contexts
+
   attr_accessible :description, :name, :status
 
   validates_presence_of :name

@@ -15,6 +15,7 @@ gem 'squeel'
 gem 'ransack'
 gem 'kaminari'
 gem 'http_accept_language'
+gem 'rails3_acts_as_paranoid'
 
 
 # Gems used only for assets and not required

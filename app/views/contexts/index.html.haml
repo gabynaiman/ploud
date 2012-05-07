@@ -1,0 +1,21 @@
+%h1 Listing contexts
+
+%table
+  %tr
+    %th Name
+    %th Project
+    %th
+    %th
+    %th
+
+  - @contexts.each do |context|
+    %tr
+      %td= context.name
+      %td= context.project
+      %td= link_to 'Show', [@project, context]
+      %td= link_to 'Edit', edit_project_context_path(@project, context)
+      %td= link_to 'Destroy', [@project, context], :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Context', new_project_context_path(@project)

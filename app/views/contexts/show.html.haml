@@ -1,0 +1,7 @@
+%p
+  %b Name:
+  = @context.name
+
+= link_to 'Edit', edit_project_context_path(@project, @context)
+\|
+= link_to 'Back', project_contexts_path(@project)
