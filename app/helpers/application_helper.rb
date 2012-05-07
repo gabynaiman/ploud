@@ -12,4 +12,12 @@ module ApplicationHelper
     end
   end
 
+  def breadcrumb(name, url=nil)
+    if url.nil?
+      " > #{name}"
+    else
+      raw(" > #{link_to(name, url)}")
+    end
+  end
+
 end
