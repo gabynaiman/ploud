@@ -1,7 +1,7 @@
 class Context < ActiveRecord::Base
   belongs_to :project
-  has_many :task_statuses
-  has_many :tasks
+  has_many :task_statuses, :dependent => :destroy
+  has_many :tasks, :dependent => :destroy
 
   attr_accessible :name
 

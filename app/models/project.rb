@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  has_many :contexts
+  has_many :contexts, :dependent => :destroy
 
   attr_accessible :description, :name, :project_status
 
