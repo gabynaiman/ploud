@@ -2,7 +2,7 @@
 = link_to 'New Project', new_project_path
 
 %h3 Active projects
-- @projects.active.each do |project|
+- @projects.active.ordered.each do |project|
   %p
     %strong= link_to project.name, project
     = "(#{project.status_name})"
@@ -21,7 +21,7 @@
             = link_to "#{task_status.name} (#{context.tasks.where(:task_status_id => task_status).count})", project_context_tasks_path(project, context, 'query[task_status_id_eq]' => task_status)
 
 %h3 Inctive projects
-- @projects.inactive.each do |project|
+- @projects.inactive.ordered.each do |project|
   %p
     %strong= link_to project.name, project
     = "(#{project.status_name})"
