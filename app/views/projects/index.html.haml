@@ -1,24 +1,33 @@
-%h1 Listing projects
-
-%table
-  %tr
-    %th Name
-    %th Description
-    %th Status
-    %th
-    %th
-    %th
-
-  - @projects.each do |project|
-    %tr
-      %td= project.name
-      %td= project.description
-      %td= project.status_name
-      %td= link_to 'Show', project
-      %td= link_to 'Edit', edit_project_path(project)
-      %td= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete
-      %td= link_to 'Contexts', project_contexts_path(project)
-
-%br
-
+%h1 Organize
 = link_to 'New Project', new_project_path
+
+%h3 Active projects
+- @projects.active.each do |project|
+  %p
+    %strong= link_to project.name, project
+    = "(#{project.status_name})"
+    |
+    = link_to 'Edit', edit_project_path(project)
+    |
+    = link_to 'New context', new_project_context_path(project)
+    |
+    = link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete
+    %ul
+      - project.contexts.ordered.each do |context|
+        %li
+          = link_to context.name, [project, context]
+          - context.task_statuses.ordered.each do |task_status|
+            |
+            = link_to "#{task_status.name} (#{context.tasks.where(:task_status_id => task_status).count})", project_context_tasks_path(project, context, 'query[task_status_id_eq]' => task_status)
+
+%h3 Inctive projects
+- @projects.inactive.each do |project|
+  %p
+    %strong= link_to project.name, project
+    = "(#{project.status_name})"
+    |
+    = link_to 'Edit', edit_project_path(project)
+    |
+    = link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete
+
+

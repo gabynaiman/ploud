@@ -63,13 +63,26 @@ class TasksController < ApplicationController
 
   def destroy
     @task = Task.find(params[:id])
-    @task.destroy
+    @tasks = nil
 
-    respond_to do |format|
-      format.html { redirect_to project_context_tasks_url(@context.project, @context) }
-      format.json { head :no_content }
+    if @task.destroy
+      @tasks = @context.tasks.search(params[:query]).result.ordered.page(params[:page])
+      flash[:notice] = 'Task was successfully deleted.'
+    else
+      flash[:error] = 'Task cant be deleted.'
     end
   end
+
+  def update_status
+    @task = Task.find(params[:id])
+    @tasks = nil
+
+    if @task.update_attribute(:task_status_id, params[:task_status_id])
+      @tasks = @context.tasks.search(params[:query]).result.ordered.page(params[:page])
+      flash[:notice] = 'Task was successfully updated.'
+    else
+      flash[:error] = @task.errors.full_messages.join
+    end  end
 
   private
 

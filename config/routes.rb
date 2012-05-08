@@ -11,7 +11,9 @@ Ploud::Application.routes.draw do
   resources :projects do
     resources :contexts do
       resources :task_statuses
-      resources :tasks
+      resources :tasks do
+        put 'update_status', :on => :member
+      end
     end
   end
 

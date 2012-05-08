@@ -2,23 +2,26 @@
 
 %h1 Listing tasks
 
-%table
-  %tr
-    %th Name
-    %th Description
-    %th Task status
-    %th
-    %th
-    %th
+%p
+  - if params[:query].blank? || params[:query][:task_status_id_eq].blank?
+    %strong All
+  - else
+    = link_to 'All', project_context_tasks_path(@context.project, @context)
+  &nbsp;
+  - @context.task_statuses.ordered.each do |task_status|
+    - if params[:query] && params[:query][:task_status_id_eq].to_i == task_status.id
+      %strong= task_status.name
+    - else
+      = link_to task_status.name, project_context_tasks_path(@context.project, @context, 'query[task_status_id_eq]' => task_status)
+    &nbsp;
 
-  - @tasks.each do |task|
+%table
+  %thead
     %tr
-      %td= task.name
-      %td= task.description
-      %td= task.task_status.name
-      %td= link_to 'Show', [@context.project, @context, task]
-      %td= link_to 'Edit', edit_project_context_task_path(@context.project, @context, task)
-      %td= link_to 'Destroy', [@context.project, @context, task], :confirm => 'Are you sure?', :method => :delete
+      %th Name
+      %th Status
+  %tbody#tasks
+    = render 'tasks'
 
 %br
 

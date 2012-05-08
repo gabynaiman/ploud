@@ -10,6 +10,7 @@ class Project < ActiveRecord::Base
 
   scope :ordered, order('LOWER(name)')
   scope :active, where{project_status.in ProjectStatus.active_values}
+  scope :inactive, where{project_status.not_in ProjectStatus.active_values}
 
   def status_name
     ProjectStatus.new(project_status).name unless project_status.nil?

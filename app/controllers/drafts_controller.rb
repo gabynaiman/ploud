@@ -43,7 +43,6 @@ class DraftsController < ApplicationController
     else
       flash[:error] = 'Task cant be deleted.'
     end
-
   end
 
 end
