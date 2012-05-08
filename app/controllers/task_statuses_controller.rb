@@ -26,7 +26,7 @@ class TaskStatusesController < ApplicationController
   # GET /task_statuses/new
   # GET /task_statuses/new.json
   def new
-    @task_status = TaskStatus.new
+    @task_status = @context.task_statuses.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,11 +42,10 @@ class TaskStatusesController < ApplicationController
   # POST /task_statuses
   # POST /task_statuses.json
   def create
-    @task_status = TaskStatus.new(params[:task_status])
-    @task_status.context = @context
+    @task_status = @context.task_statuses.build
 
     respond_to do |format|
-      if @task_status.save
+      if @task_status.update_attributes(params[:task_status])
         format.html { redirect_to [@context.project, @context, @task_status], notice: 'Task status was successfully created.' }
         format.json { render json: @task_status, status: :created, location: @task_status }
       else
