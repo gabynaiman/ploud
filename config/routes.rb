@@ -8,6 +8,9 @@ Ploud::Application.routes.draw do
   match 'drafts/:id', :to => 'drafts#destroy', :via => :delete, :as => :draft
   match 'drafts/:id', :to => 'drafts#update',  :via => :put,    :as => :draft
 
+  match 'todos',                   :to => 'todos#index',         :via => :get,    :as => :todos
+  match 'todos/update_status/:id', :to => 'todos#update_status', :via => :put,    :as => :update_status_todo
+
   resources :projects do
     resources :contexts do
       resources :task_statuses

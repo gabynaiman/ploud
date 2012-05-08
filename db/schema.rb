@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120508031909) do
+ActiveRecord::Schema.define(:version => 20120508172347) do
 
   create_table "contexts", :force => true do |t|
     t.string   "name",              :null => false
@@ -36,12 +36,13 @@ ActiveRecord::Schema.define(:version => 20120508031909) do
   end
 
   create_table "task_statuses", :force => true do |t|
-    t.string   "name",       :null => false
-    t.integer  "context_id", :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "created_by", :null => false
-    t.integer  "updated_by", :null => false
+    t.string   "name",                          :null => false
+    t.integer  "context_id",                    :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.integer  "created_by",                    :null => false
+    t.integer  "updated_by",                    :null => false
+    t.boolean  "todo",       :default => false, :null => false
   end
 
   add_index "task_statuses", ["context_id"], :name => "index_task_statuses_on_context_id"

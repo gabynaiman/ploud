@@ -6,6 +6,7 @@
   %tr
     %th Name
     %th Default
+    %th Todo
     %th
     %th
     %th
@@ -14,6 +15,7 @@
     %tr
       %td= task_status.name
       %td= task_status.default
+      %td= task_status.todo
       %td= link_to 'Show', [@context.project, @context, task_status]
       %td= link_to 'Edit', edit_project_context_task_status_path(@context.project, @context, task_status)
       %td= link_to 'Destroy', [@context.project, @context, task_status], :confirm => 'Are you sure?', :method => :delete

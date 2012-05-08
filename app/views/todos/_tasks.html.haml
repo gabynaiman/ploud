@@ -1,0 +1,13 @@
+- @projects.each do |project|
+  %h3= link_to project.name, project
+  %ul
+    - project.contexts.ordered.each do |context|
+      %li
+        %strong= link_to context.name, [project, context]
+        %ul
+          - context.tasks.todo.ordered.each do |task|
+            %li
+              = task.name
+              = select_tag :task_status_id,
+                           options_for_select(context.task_statuses.ordered.map{|s| [s.name, s.id]}, :selected => task.task_status_id),
+                           :data => {:remote => true, :url => update_status_todo_path(task), :method => :put}

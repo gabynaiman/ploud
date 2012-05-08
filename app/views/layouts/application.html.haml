@@ -17,6 +17,12 @@
             - else
               Classify
           |
+          %span#todos_menu
+            - if Task.todo.count > 0
+              = link_to "Todos (#{Task.todo.count})", todos_path
+            - else
+              Todos
+          |
           = link_to 'Organize', projects_path
           - if content_for? :breadcrumbs
             = yield(:breadcrumbs)

@@ -1,7 +1,7 @@
 class TaskStatus < ActiveRecord::Base
   belongs_to :context, :autosave => true
 
-  attr_accessible :name, :default
+  attr_accessible :name, :default, :todo
 
   validates_presence_of :context
   validates_presence_of :name

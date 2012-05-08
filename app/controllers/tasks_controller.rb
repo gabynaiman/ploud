@@ -82,7 +82,8 @@ class TasksController < ApplicationController
       flash[:notice] = 'Task was successfully updated.'
     else
       flash[:error] = @task.errors.full_messages.join
-    end  end
+    end
+  end
 
   private
 
