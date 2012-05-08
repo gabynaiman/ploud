@@ -16,6 +16,6 @@
     = f.text_area :description
   .field
     = f.label :task_status_id
-    = f.select :task_status_id, TaskStatus.all.map{|s| [s.name, s.id]}
+    = f.select :task_status_id, @context.task_statuses.ordered.map{|s| [s.name, s.id]}
   .actions
     = f.submit 'Save'
