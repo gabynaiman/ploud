@@ -1,10 +1,8 @@
 class TasksController < ApplicationController
   before_filter :load_context
 
-  # GET /tasks
-  # GET /tasks.json
   def index
-    @tasks = @context.tasks.search(params[:query]).result.order('LOWER(name)').page(params[:page])
+    @tasks = @context.tasks.search(params[:query]).result.ordered.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -12,8 +10,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # GET /tasks/1
-  # GET /tasks/1.json
   def show
     @task = Task.find(params[:id])
 
@@ -23,8 +19,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # GET /tasks/new
-  # GET /tasks/new.json
   def new
     @task = Task.new
 
@@ -34,13 +28,10 @@ class TasksController < ApplicationController
     end
   end
 
-  # GET /tasks/1/edit
   def edit
     @task = Task.find(params[:id])
   end
 
-  # POST /tasks
-  # POST /tasks.json
   def create
     @task = Task.new(params[:task])
     @task.context = @context
@@ -56,8 +47,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # PUT /tasks/1
-  # PUT /tasks/1.json
   def update
     @task = Task.find(params[:id])
 
@@ -72,8 +61,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1
-  # DELETE /tasks/1.json
   def destroy
     @task = Task.find(params[:id])
     @task.destroy

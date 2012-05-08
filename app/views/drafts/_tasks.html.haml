@@ -1,0 +1,9 @@
+- @tasks.each do |task|
+  %tr
+    %td= task.name
+    %td= select_tag :context_id,
+                    grouped_options_for_select(context_select_list),
+                    :prompt => '[Select context]',
+                    :class => 'context-selector',
+                    :data => {:remote => true, :url => draft_path(task), :method => :put}
+    %td= link_to 'Destroy', draft_path(task), :confirm => 'Are you sure?', :method => :delete, :remote => true

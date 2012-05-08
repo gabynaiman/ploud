@@ -5,6 +5,7 @@
 %table
   %tr
     %th Name
+    %th Default
     %th
     %th
     %th
@@ -12,6 +13,7 @@
   - @task_statuses.each do |task_status|
     %tr
       %td= task_status.name
+      %td= task_status.default
       %td= link_to 'Show', [@context.project, @context, task_status]
       %td= link_to 'Edit', edit_project_context_task_status_path(@context.project, @context, task_status)
       %td= link_to 'Destroy', [@context.project, @context, task_status], :confirm => 'Are you sure?', :method => :delete

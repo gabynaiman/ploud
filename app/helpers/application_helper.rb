@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def show_flash
-    content_tag :div do
+    message = content_tag :div do
       flash.each do |key, value|
         concat(
           content_tag(:div, :id => key) do
@@ -10,6 +10,8 @@ module ApplicationHelper
         )
       end
     end
+    flash.clear
+    message
   end
 
   def breadcrumb(name, url=nil)

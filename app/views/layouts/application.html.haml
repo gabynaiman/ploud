@@ -11,15 +11,27 @@
         %td
           = link_to 'Home', root_path
           |
+          %span#classify_menu
+            - if Task.drafts_of(current_user).count > 0
+              = link_to raw("Classify (#{Task.drafts_of(current_user).count})"), drafts_path
+            - else
+              Classify
+          |
           = link_to 'Projects', projects_path
           - if content_for? :breadcrumbs
             = yield(:breadcrumbs)
         %td{:style => 'text-align: right'}
           - if user_signed_in?
+            = form_for :task, :url => drafts_path, :remote => true, :html => {:style => 'display: inline-block'} do |f|
+              = f.text_field :name, :placeholder => 'New task', :style => 'width: 500px'
+              = f.submit '+'
+            |
             = current_user.email
+            |
             = link_to('Sign out', destroy_user_session_path, :method => :delete)
           - else
             = link_to('Sign in', new_user_session_path)
     %hr
-    = show_flash
+    #flash
+      = show_flash
     = yield

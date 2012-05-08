@@ -4,7 +4,7 @@ class ContextsController < ApplicationController
   # GET /contexts
   # GET /contexts.json
   def index
-    @contexts = @project.contexts.search(params[:query]).result.order('LOWER(name)').page(params[:page])
+    @contexts = @project.contexts.search(params[:query]).result.ordered.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

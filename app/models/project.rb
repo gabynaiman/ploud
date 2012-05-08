@@ -8,6 +8,9 @@ class Project < ActiveRecord::Base
 
   acts_as_auditable
 
+  scope :ordered, order('LOWER(name)')
+  scope :active, where{project_status.in ProjectStatus.active_values}
+
   def status_name
     ProjectStatus.new(project_status).name unless project_status.nil?
   end
