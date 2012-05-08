@@ -15,9 +15,10 @@ class TaskStatus < ActiveRecord::Base
   end
 
   def default=(value)
-    if default && !value
+    is_default = value == '1' || value == true
+    if default && !is_default
       context.default_status = nil
-    elsif !default && value
+    elsif !default && is_default
       context.default_status = self
     end
   end
