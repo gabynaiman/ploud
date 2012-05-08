@@ -8,6 +8,7 @@ gem 'rails', '3.2.3'
 gem 'sqlite3', :groups => [:development, :test]
 gem 'pg', :group => :production
 
+gem 'thin'
 gem 'devise'
 gem 'haml'
 gem 'haml-rails'
