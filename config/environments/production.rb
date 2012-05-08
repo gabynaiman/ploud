@@ -50,6 +50,15 @@ Ploud::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default_url_options = { :host => 'ploud.herokuapp.com' }
+  config.action_mailer.smtp_settings = {
+      :address => 'smtp.gmail.com',
+      :port => 587,
+      :user_name => 'ploud.development@gmail.com',
+      :password => 'ploud2012',
+      :authentication => :plain
+  }
+
 
   # Enable threaded mode
   # config.threadsafe!
