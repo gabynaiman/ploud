@@ -33,8 +33,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(params[:task])
-    @task.context = @context
+    @task = @context.tasks.build(params[:task])
 
     respond_to do |format|
       if @task.save
@@ -52,7 +51,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
-        format.html { redirect_to [@context.project, @context, @task], notice: 'Task was successfully updated.' }
+        format.html { redirect_to [@task.context.project, @task.context, @task], notice: 'Task was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

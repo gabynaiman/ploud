@@ -1,8 +1,8 @@
 class Task < ActiveRecord::Base
-  belongs_to :context
+  belongs_to :context, :inverse_of => :tasks
   belongs_to :task_status
 
-  attr_accessible :description, :name, :task_status_id
+  attr_accessible :context_id, :name, :description, :task_status_id
 
   validates_presence_of :name
 
@@ -12,9 +12,10 @@ class Task < ActiveRecord::Base
   scope :drafts_of, lambda { |user| where(:context_id => nil).where(:created_by => user) }
   scope :todo, joins{task_status}.joins{context.project}.where{task_status.todo == true}.where{context.project.project_status.in(ProjectStatus.active_values)}
 
-  def update_context(context_id)
-    self.context = Context.find(context_id)
-    self.task_status = self.context.default_status
-    save
+  before_save :after_change_context
+
+  def after_change_context
+    self.task_status = self.context.default_status if context_id_changed?
   end
+
 end

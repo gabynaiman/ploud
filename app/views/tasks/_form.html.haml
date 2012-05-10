@@ -14,8 +14,12 @@
   .field
     = f.label :description
     = f.text_area :description
-  .field
-    = f.label :task_status_id
-    = f.select :task_status_id, @context.task_statuses.ordered.map{|s| [s.name, s.id]}
+  - unless @task.new_record?
+    .field
+      = f.label :context_id
+      = f.select :context_id, context_select_list
+    .field
+      = f.label :task_status_id
+      = f.select :task_status_id, @context.task_statuses.ordered.map{|s| [s.name, s.id]}
   .actions
     = f.submit 'Save'

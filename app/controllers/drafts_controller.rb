@@ -25,7 +25,7 @@ class DraftsController < ApplicationController
     @task = Task.find(params[:id])
     @tasks = nil
 
-    if @task.update_context(params[:context_id])
+    if @task.update_attribute(:context_id, params[:context_id])
       @tasks = Task.drafts_of(current_user).ordered
       flash[:notice] = 'Task was successfully classified.'
     else
