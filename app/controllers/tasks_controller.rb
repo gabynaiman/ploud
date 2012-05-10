@@ -65,7 +65,7 @@ class TasksController < ApplicationController
     @tasks = nil
 
     if @task.destroy
-      @tasks = @context.tasks.search(params[:query]).result.ordered.page(params[:page])
+      @tasks = @context.tasks.search(params[:query]).result.priorized.ordered.page(params[:page])
       flash[:notice] = 'Task was successfully deleted.'
     else
       flash[:error] = 'Task cant be deleted.'
@@ -77,7 +77,7 @@ class TasksController < ApplicationController
     @tasks = nil
 
     if @task.update_attribute(:task_status_id, params[:task_status_id])
-      @tasks = @context.tasks.search(params[:query]).result.ordered.page(params[:page])
+      @tasks = @context.tasks.search(params[:query]).result.priorized.ordered.page(params[:page])
       flash[:notice] = 'Task was successfully updated.'
     else
       flash[:error] = @task.errors.full_messages.join
