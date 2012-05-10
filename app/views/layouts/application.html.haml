@@ -30,7 +30,7 @@
             = yield(:breadcrumbs)
         %td{:style => 'text-align: right'}
           - if user_signed_in?
-            = form_for :task, :url => drafts_path, :remote => true, :html => {:style => 'display: inline-block'} do |f|
+            = form_for :draft, :url => drafts_path, :remote => true, :html => {:style => 'display: inline-block'} do |f|
               = f.text_field :name, :placeholder => 'New task', :style => 'width: 500px'
               = f.submit '+'
             |

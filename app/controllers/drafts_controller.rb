@@ -10,7 +10,7 @@ class DraftsController < ApplicationController
   end
 
   def create
-    @task = Task.new(params[:task])
+    @task = Task.new(params[:draft])
     @tasks = nil
 
     if @task.save
