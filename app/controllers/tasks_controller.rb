@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_filter :load_context
 
   def index
-    @tasks = @context.tasks.search(params[:query]).result.ordered.page(params[:page])
+    @tasks = @context.tasks.search(params[:query]).result.priorized.ordered.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

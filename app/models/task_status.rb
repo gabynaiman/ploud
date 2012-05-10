@@ -8,7 +8,7 @@ class TaskStatus < ActiveRecord::Base
 
   acts_as_auditable
 
-  scope :ordered, order('LOWER(name)')
+  scope :ordered, order{lower name}
 
   def default
     context.default_status == self

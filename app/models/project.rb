@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
 
   acts_as_auditable
 
-  scope :ordered, order('LOWER(name)')
+  scope :ordered, order{lower name}
   scope :active, where{project_status.in ProjectStatus.active_values}
   scope :inactive, where{project_status.not_in ProjectStatus.active_values}
 
