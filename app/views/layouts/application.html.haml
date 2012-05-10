@@ -5,8 +5,10 @@
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     = csrf_meta_tags
-  %body
-    %table{:style => 'width: 100%'}
+  %body{:style => 'margin-top: 0'}
+    #flash{:style => 'display: none; position: fixed; top: 33px; background-color: #fafafa; padding: 2px 10px 2px 10px'}
+      = show_flash
+    %table{:style => 'width: 100%; border-bottom: 1px solid #000'}
       %tr
         %td
           = link_to 'Home', root_path
@@ -37,7 +39,5 @@
             = link_to('Sign out', destroy_user_session_path, :method => :delete)
           - else
             = link_to('Sign in', new_user_session_path)
-    %hr
-    #flash
-      = show_flash
-    = yield
+    %div{:style => 'margin-top: 25px'}
+      = yield

@@ -1,4 +1,4 @@
-$('#flash').html("#{escape_javascript(show_flash)}");
+$('#flash').hide().html("#{escape_javascript(show_flash)}").fadeIn();
 $("#todos").html("#{escape_javascript(render 'tasks.html.haml')}");
 
 - if Task.todo.count > 0
