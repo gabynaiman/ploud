@@ -7,7 +7,7 @@
         %ul
           - context.tasks.todo.ordered.each do |task|
             %li
-              = task.name
+              = link_to task.name, [project, context, task]
               = select_tag :task_status_id,
                            options_for_select(context.task_statuses.ordered.map{|s| [s.name, s.id]}, :selected => task.task_status_id),
                            :data => {:remote => true, :url => update_status_todo_path(task), :method => :put}
