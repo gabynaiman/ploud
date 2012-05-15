@@ -9,7 +9,7 @@ class Task < ActiveRecord::Base
   acts_as_auditable
 
   scope :ordered, order{lower name}
-  scope :priorized, order{(priority * (ActiveRecord::Base.connection.adapter_name == 'SQLite' ? -1 : 1)).desc}
+  scope :priorized, (ActiveRecord::Base.connection.adapter_name == 'SQLite') ? order{(priority * -1).desc} : order(:priority)
   scope :drafts_of, lambda { |user| where(:context_id => nil).where(:created_by => user) }
   scope :todo, joins{task_status}.joins{context.project}.where{task_status.todo == true}.where{context.project.project_status.in(ProjectStatus.active_values)}
 
