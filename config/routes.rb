@@ -16,6 +16,7 @@ Ploud::Application.routes.draw do
       resources :task_statuses
       resources :tasks do
         put 'update_status', :on => :member
+        put 'update_priority', :on => :member
       end
     end
   end

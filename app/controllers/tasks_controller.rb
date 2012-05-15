@@ -70,10 +70,20 @@ class TasksController < ApplicationController
   end
 
   def update_status
+    update_attribute(:task_status_id)
+  end
+
+  def update_priority
+    update_attribute(:priority)
+  end
+
+  private
+
+  def update_attribute(attribute)
     @task = Task.find(params[:id])
     @tasks = nil
 
-    if @task.update_attribute(:task_status_id, params[:task_status_id])
+    if @task.update_attribute(attribute, params[attribute])
       @tasks = @context.tasks.search(params[:query]).result.priorized.ordered.page(params[:page])
       flash[:notice] = 'Task was successfully updated.'
     else
@@ -82,8 +92,6 @@ class TasksController < ApplicationController
 
     render 'index'
   end
-
-  private
 
   def load_context
     @context = Context.find(params[:context_id])
