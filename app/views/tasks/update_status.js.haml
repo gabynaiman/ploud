@@ -1,6 +1,0 @@
-= render 'tasks.js.haml'
-
-- if Task.todo.count > 0
-  $("#todos_menu").html("#{escape_javascript(link_to("Todos (#{Task.todo.count})", todos_path))}");
-- else
-  $("#todos_menu").html("Todos");

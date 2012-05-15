@@ -22,7 +22,10 @@
       %th Priority
       %th Status
   %tbody#tasks
-    = render 'tasks'
+    = render @tasks
+
+#paginator
+  = paginate @tasks, :remote => true, :params => {:controller => :tasks, :action => :index}
 
 %br
 

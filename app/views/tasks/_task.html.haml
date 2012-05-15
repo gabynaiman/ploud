@@ -1,0 +1,9 @@
+%tr
+  %td= task.name
+  %td= task.priority
+  %td= select_tag :task_status_id,
+                  options_for_select(@context.task_statuses.ordered.map{|s| [s.name, s.id]}, :selected => task.task_status_id),
+                  :data => {:remote => true, :url => update_status_project_context_task_path(@context.project, @context, task, :query => params[:query]), :method => :put}
+  %td= link_to 'Show', [@context.project, @context, task]
+  %td= link_to 'Edit', edit_project_context_task_path(@context.project, @context, task)
+  %td= link_to 'Destroy', project_context_task_path(@context.project, @context, task, :query => params[:query]), :confirm => 'Are you sure?', :method => :delete, :remote => true

@@ -3,11 +3,6 @@ class TasksController < ApplicationController
 
   def index
     @tasks = @context.tasks.search(params[:query]).result.priorized.ordered.page(params[:page])
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @tasks }
-    end
   end
 
   def show
@@ -70,6 +65,8 @@ class TasksController < ApplicationController
     else
       flash[:error] = 'Task cant be deleted.'
     end
+
+    render 'index'
   end
 
   def update_status
@@ -82,6 +79,8 @@ class TasksController < ApplicationController
     else
       flash[:error] = @task.errors.full_messages.join
     end
+
+    render 'index'
   end
 
   private
