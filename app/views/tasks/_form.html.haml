@@ -26,6 +26,6 @@
       = f.select :task_status_id, @workspace.task_statuses.ordered.map{|s| [s.name, s.id]}
     .field
       = f.label :due_date
-      = f.datetime_select :due_date
+      = f.datetime_select :due_date, :prompt => true
   .actions
     = f.submit 'Save'

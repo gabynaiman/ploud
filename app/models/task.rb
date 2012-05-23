@@ -21,7 +21,7 @@ class Task < ActiveRecord::Base
   end
 
   def due_date_after_now
-    errors.add(:due_date, "invalid due date") unless due_date > Time.now
+    errors.add(:due_date, "invalid due date") if due_date.present? && due_date < Time.now
   end
 
 end
