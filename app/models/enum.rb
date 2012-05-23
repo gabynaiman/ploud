@@ -20,7 +20,7 @@ class Enum
   attr_reader :id
 
   def initialize(id)
-    raise "Invalid action type: #{id}" unless self.class.all_values.include? id
+    raise "Invalid id: #{id}" unless self.class.all_values.include? id
     @id = id
   end
 
