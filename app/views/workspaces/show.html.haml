@@ -4,6 +4,10 @@
   %b Name:
   = @workspace.name
 
+%ul
+  %li= link_to 'Statuses', context_workspace_task_statuses_path(@context, @workspace)
+  %li= link_to 'Tasks', context_workspace_tasks_path(@context, @workspace)
+
 = link_to 'Edit', edit_context_workspace_path(@context, @workspace)
 \|
 = link_to 'Back', context_workspaces_path(@context)
