@@ -2,9 +2,10 @@ class Task < ActiveRecord::Base
   belongs_to :workspace, :inverse_of => :tasks
   belongs_to :task_status
 
-  attr_accessible :workspace_id, :name, :description, :task_status_id, :priority
+  attr_accessible :workspace_id, :name, :description, :task_status_id, :priority, :due_date
 
   validates_presence_of :name
+  validate :due_date_after_now
 
   acts_as_auditable
 
@@ -17,6 +18,10 @@ class Task < ActiveRecord::Base
 
   def after_change_workspace
     self.task_status = self.workspace.default_status if workspace_id_changed?
+  end
+
+  def due_date_after_now
+    errors.add(:due_date, "invalid due date") unless due_date > Time.now
   end
 
 end

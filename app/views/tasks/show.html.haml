@@ -12,6 +12,9 @@
 %p
   %b Task status:
   = @task.task_status.name
+%p
+  %b Due date:
+  = @task.due_date
 
 = link_to 'Edit', edit_context_workspace_task_path(@workspace.context, @workspace, @task)
 \|
