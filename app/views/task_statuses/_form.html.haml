@@ -1,6 +1,6 @@
 = task_status_breadcrumbs
 
-= form_for [@context.project, @context, @task_status] do |f|
+= form_for [@workspace.context, @workspace, @task_status] do |f|
   -if @task_status.errors.any?
     #error_explanation
       %h2= "#{pluralize(@task_status.errors.count, "error")} prohibited this task_status from being saved:"

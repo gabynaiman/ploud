@@ -1,10 +1,8 @@
 class TaskStatusesController < ApplicationController
-  before_filter :load_context
+  before_filter :load_workspace
 
-  # GET /task_statuses
-  # GET /task_statuses.json
   def index
-    @task_statuses = @context.task_statuses.search(params[:query]).result.ordered.page(params[:page])
+    @task_statuses = @workspace.task_statuses.search(params[:query]).result.ordered.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -12,8 +10,6 @@ class TaskStatusesController < ApplicationController
     end
   end
 
-  # GET /task_statuses/1
-  # GET /task_statuses/1.json
   def show
     @task_status = TaskStatus.find(params[:id])
 
@@ -23,10 +19,8 @@ class TaskStatusesController < ApplicationController
     end
   end
 
-  # GET /task_statuses/new
-  # GET /task_statuses/new.json
   def new
-    @task_status = @context.task_statuses.build
+    @task_status = @workspace.task_statuses.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,19 +28,16 @@ class TaskStatusesController < ApplicationController
     end
   end
 
-  # GET /task_statuses/1/edit
   def edit
     @task_status = TaskStatus.find(params[:id])
   end
 
-  # POST /task_statuses
-  # POST /task_statuses.json
   def create
-    @task_status = @context.task_statuses.build
+    @task_status = @workspace.task_statuses.build
 
     respond_to do |format|
       if @task_status.update_attributes(params[:task_status])
-        format.html { redirect_to [@context.project, @context, @task_status], notice: 'Task status was successfully created.' }
+        format.html { redirect_to [@workspace.context, @workspace, @task_status], notice: 'Task status was successfully created.' }
         format.json { render json: @task_status, status: :created, location: @task_status }
       else
         format.html { render action: "new" }
@@ -55,14 +46,12 @@ class TaskStatusesController < ApplicationController
     end
   end
 
-  # PUT /task_statuses/1
-  # PUT /task_statuses/1.json
   def update
     @task_status = TaskStatus.find(params[:id])
 
     respond_to do |format|
       if @task_status.update_attributes(params[:task_status])
-        format.html { redirect_to [@context.project, @context, @task_status], notice: 'Task status was successfully updated.' }
+        format.html { redirect_to [@workspace.context, @workspace, @task_status], notice: 'Task status was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -71,21 +60,19 @@ class TaskStatusesController < ApplicationController
     end
   end
 
-  # DELETE /task_statuses/1
-  # DELETE /task_statuses/1.json
   def destroy
     @task_status = TaskStatus.find(params[:id])
     @task_status.destroy
 
     respond_to do |format|
-      format.html { redirect_to project_context_task_statuses_url(@context.project, @context) }
+      format.html { redirect_to context_workspace_task_statuses_url(@workspace.context, @workspace) }
       format.json { head :no_content }
     end
   end
 
   private
 
-  def load_context
-    @context = Context.find(params[:context_id])
+  def load_workspace
+    @workspace = Workspace.find(params[:workspace_id])
   end
 end

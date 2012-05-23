@@ -2,9 +2,9 @@ module TasksHelper
 
   def task_breadcrumbs
     content_for :breadcrumbs do
-      concat(breadcrumb(@context.project.name, @context.project))
-      concat(breadcrumb('Contexts', project_contexts_path(@context.project)))
-      concat(breadcrumb(@context.name, [@context.project, @context]))
+      concat(breadcrumb(@workspace.context.name, @workspace.context))
+      concat(breadcrumb('Workspaces', context_workspaces_path(@workspace.context)))
+      concat(breadcrumb(@workspace.name, [@workspace.context, @workspace]))
     end
   end
 

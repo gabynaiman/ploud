@@ -2,6 +2,6 @@
 
 = render 'form'
 
-= link_to 'Show', [@context.project, @context, @task]
+= link_to 'Show', [@workspace.context, @workspace, @task]
 \|
-= link_to 'Back', project_context_tasks_path(@context.project, @context)
+= link_to 'Back', context_workspace_tasks_path(@workspace.context, @workspace)

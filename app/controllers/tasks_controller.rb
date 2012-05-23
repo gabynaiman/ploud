@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
-  before_filter :load_context
+  before_filter :load_workspace
 
   def index
-    @tasks = @context.tasks.search(params[:query]).result.priorized.ordered.page(params[:page])
+    @tasks = @workspace.tasks.search(params[:query]).result.priorized.ordered.page(params[:page])
   end
 
   def show
@@ -28,11 +28,11 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = @context.tasks.build(params[:task])
+    @task = @workspace.tasks.build(params[:task])
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to [@context.project, @context, @task], notice: 'Task was successfully created.' }
+        format.html { redirect_to [@workspace.context, @workspace, @task], notice: 'Task was successfully created.' }
         format.json { render json: @task, status: :created, location: @task }
       else
         format.html { render action: "new" }
@@ -46,7 +46,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
-        format.html { redirect_to [@task.context.project, @task.context, @task], notice: 'Task was successfully updated.' }
+        format.html { redirect_to [@task.workspace.context, @task.workspace, @task], notice: 'Task was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -60,7 +60,7 @@ class TasksController < ApplicationController
     @tasks = nil
 
     if @task.destroy
-      @tasks = @context.tasks.search(params[:query]).result.priorized.ordered.page(params[:page])
+      @tasks = @workspace.tasks.search(params[:query]).result.priorized.ordered.page(params[:page])
       flash[:notice] = 'Task was successfully deleted.'
     else
       flash[:error] = 'Task cant be deleted.'
@@ -84,7 +84,7 @@ class TasksController < ApplicationController
     @tasks = nil
 
     if @task.update_attribute(attribute, params[attribute])
-      @tasks = @context.tasks.search(params[:query]).result.priorized.ordered.page(params[:page])
+      @tasks = @workspace.tasks.search(params[:query]).result.priorized.ordered.page(params[:page])
       flash[:notice] = 'Task was successfully updated.'
     else
       flash[:error] = @task.errors.full_messages.join
@@ -93,8 +93,8 @@ class TasksController < ApplicationController
     render 'index'
   end
 
-  def load_context
-    @context = Context.find(params[:context_id])
+  def load_workspace
+    @workspace = Workspace.find(params[:workspace_id])
   end
 
 end

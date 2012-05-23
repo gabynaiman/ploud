@@ -1,9 +1,10 @@
-= context_breadcrumbs
-
 %p
   %b Name:
   = @context.name
+%p
+  %b Description:
+  = @context.description
 
-= link_to 'Edit', edit_project_context_path(@project, @context)
+= link_to 'Edit', edit_context_path(@context)
 \|
-= link_to 'Back', project_contexts_path(@project)
+= link_to 'Back', contexts_path

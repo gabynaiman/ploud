@@ -1,6 +1,6 @@
 = task_breadcrumbs
 
-= form_for [@context.project, @context, @task] do |f|
+= form_for [@workspace.context, @workspace, @task] do |f|
   -if @task.errors.any?
     #error_explanation
       %h2= "#{pluralize(@task.errors.count, "error")} prohibited this task from being saved:"
@@ -19,10 +19,10 @@
     = f.number_field :priority
   - unless @task.new_record?
     .field
-      = f.label :context_id
-      = f.select :context_id, context_select_list
+      = f.label :workspace_id
+      = f.select :workspace_id, workspace_select_list
     .field
       = f.label :task_status_id
-      = f.select :task_status_id, @context.task_statuses.ordered.map{|s| [s.name, s.id]}
+      = f.select :task_status_id, @workspace.task_statuses.ordered.map{|s| [s.name, s.id]}
   .actions
     = f.submit 'Save'

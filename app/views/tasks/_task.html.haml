@@ -2,10 +2,10 @@
   %td= task.name
   %td= select_tag :priority,
                   options_for_select(([''] + (1..9).map{|i| i.to_s}), :selected => task.priority),
-                  :data => {:remote => true, :url => update_priority_project_context_task_path(@context.project, @context, task, :query => params[:query]), :method => :put}
+                  :data => {:remote => true, :url => update_priority_context_workspace_task_path(@workspace.context, @workspace, task, :query => params[:query]), :method => :put}
   %td= select_tag :task_status_id,
-                  options_for_select(@context.task_statuses.ordered.map{|s| [s.name, s.id]}, :selected => task.task_status_id),
-                  :data => {:remote => true, :url => update_status_project_context_task_path(@context.project, @context, task, :query => params[:query]), :method => :put}
-  %td= link_to 'Show', [@context.project, @context, task]
-  %td= link_to 'Edit', edit_project_context_task_path(@context.project, @context, task)
-  %td= link_to 'Destroy', project_context_task_path(@context.project, @context, task, :query => params[:query]), :confirm => 'Are you sure?', :method => :delete, :remote => true
+                  options_for_select(@workspace.task_statuses.ordered.map{|s| [s.name, s.id]}, :selected => task.task_status_id),
+                  :data => {:remote => true, :url => update_status_context_workspace_task_path(@workspace.context, @workspace, task, :query => params[:query]), :method => :put}
+  %td= link_to 'Show', [@workspace.context, @workspace, task]
+  %td= link_to 'Edit', edit_context_workspace_task_path(@workspace.context, @workspace, task)
+  %td= link_to 'Destroy', context_workspace_task_path(@workspace.context, @workspace, task, :query => params[:query]), :confirm => 'Are you sure?', :method => :delete, :remote => true

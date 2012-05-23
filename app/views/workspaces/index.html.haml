@@ -1,0 +1,24 @@
+= workspace_breadcrumbs
+
+%h1 Listing workspaces
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+    %th
+
+  - @workspaces.each do |workspace|
+    %tr
+      %td= workspace.name
+      %td= link_to 'Show', [@context, workspace]
+      %td= link_to 'Edit', edit_context_workspace_path(@context, workspace)
+      %td= link_to 'Destroy', [@context, workspace], :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Statuses', context_workspace_task_statuses_path(@context, workspace)
+      %td= link_to 'Tasks', context_workspace_tasks_path(@context, workspace)
+
+%br
+
+= link_to 'New Context', new_context_workspace_path(@context)

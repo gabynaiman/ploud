@@ -11,8 +11,8 @@ Ploud::Application.routes.draw do
   match 'todos',                   :to => 'todos#index',         :via => :get,    :as => :todos
   match 'todos/update_status/:id', :to => 'todos#update_status', :via => :put,    :as => :update_status_todo
 
-  resources :projects do
-    resources :contexts do
+  resources :contexts do
+    resources :workspaces do
       resources :task_statuses
       resources :tasks do
         put 'update_status', :on => :member

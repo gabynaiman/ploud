@@ -1,13 +1,13 @@
-- @projects.each do |project|
-  %h3= link_to project.name, project
+- @contexts.each do |context|
+  %h3= link_to context.name, context
   %ul
-    - project.contexts.ordered.each do |context|
+    - context.workspaces.ordered.each do |workspace|
       %li
-        %strong= link_to context.name, [project, context]
+        %strong= link_to workspace.name, [context, workspace]
         %ul
-          - context.tasks.todo.ordered.each do |task|
+          - workspace.tasks.todo.ordered.each do |task|
             %li
-              = link_to task.name, [project, context, task]
+              = link_to task.name, [context, workspace, task]
               = select_tag :task_status_id,
-                           options_for_select(context.task_statuses.ordered.map{|s| [s.name, s.id]}, :selected => task.task_status_id),
+                           options_for_select(workspace.task_statuses.ordered.map{|s| [s.name, s.id]}, :selected => task.task_status_id),
                            :data => {:remote => true, :url => update_status_todo_path(task), :method => :put}

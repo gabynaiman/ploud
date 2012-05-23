@@ -1,0 +1,9 @@
+= workspace_breadcrumbs
+
+%p
+  %b Name:
+  = @workspace.name
+
+= link_to 'Edit', edit_context_workspace_path(@context, @workspace)
+\|
+= link_to 'Back', context_workspaces_path(@context)

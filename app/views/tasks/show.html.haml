@@ -13,6 +13,6 @@
   %b Task status:
   = @task.task_status.name
 
-= link_to 'Edit', edit_project_context_task_path(@context.project, @context, @task)
+= link_to 'Edit', edit_context_workspace_task_path(@workspace.context, @workspace, @task)
 \|
-= link_to 'Back', project_context_tasks_path(@context.project, @context)
+= link_to 'Back', context_workspace_tasks_path(@workspace.context, @workspace)

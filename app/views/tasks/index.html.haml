@@ -6,13 +6,13 @@
   - if params[:query].blank? || params[:query][:task_status_id_eq].blank?
     %strong All
   - else
-    = link_to 'All', project_context_tasks_path(@context.project, @context)
+    = link_to 'All', context_workspace_tasks_path(@workspace.context, @workspace)
   &nbsp;
-  - @context.task_statuses.ordered.each do |task_status|
+  - @workspace.task_statuses.ordered.each do |task_status|
     - if params[:query] && params[:query][:task_status_id_eq].to_i == task_status.id
       %strong= task_status.name
     - else
-      = link_to task_status.name, project_context_tasks_path(@context.project, @context, 'query[task_status_id_eq]' => task_status)
+      = link_to task_status.name, context_workspace_tasks_path(@workspace.context, @workspace, 'query[task_status_id_eq]' => task_status)
     &nbsp;
 
 %table
@@ -29,4 +29,4 @@
 
 %br
 
-= link_to 'New Task', new_project_context_task_path(@context.project, @context)
+= link_to 'New Task', new_context_workspace_task_path(@workspace.context, @workspace)

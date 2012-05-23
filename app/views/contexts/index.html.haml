@@ -1,24 +1,19 @@
-= context_breadcrumbs
+%h1 Organize
+= link_to 'New context', new_context_path
 
-%h1 Listing contexts
-
-%table
-  %tr
-    %th Name
-    %th
-    %th
-    %th
-    %th
-
-  - @contexts.each do |context|
-    %tr
-      %td= context.name
-      %td= link_to 'Show', [@project, context]
-      %td= link_to 'Edit', edit_project_context_path(@project, context)
-      %td= link_to 'Destroy', [@project, context], :confirm => 'Are you sure?', :method => :delete
-      %td= link_to 'Statuses', project_context_task_statuses_path(@project, context)
-      %td= link_to 'Tasks', project_context_tasks_path(@project, context)
-
-%br
-
-= link_to 'New Context', new_project_context_path(@project)
+- @contexts.ordered.each do |context|
+  %p
+    %strong= link_to context.name, context
+    |
+    = link_to 'Edit', edit_context_path(context)
+    |
+    = link_to 'New workspace', new_context_workspace_path(context)
+    |
+    = link_to 'Destroy', context, :confirm => 'Are you sure?', :method => :delete
+    %ul
+      - context.workspaces.ordered.each do |workspace|
+        %li
+          = link_to workspace.name, [context, workspace]
+          - workspace.task_statuses.ordered.each do |task_status|
+            |
+            = link_to "#{task_status.name} (#{workspace.tasks.where(:task_status_id => task_status).count})", context_workspace_tasks_path(workspace, workspace, 'query[task_status_id_eq]' => task_status)

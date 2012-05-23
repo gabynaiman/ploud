@@ -10,6 +10,6 @@
   %b Todo:
   = @task_status.todo
 
-= link_to 'Edit', edit_project_context_task_status_path(@context.project, @context, @task_status)
+= link_to 'Edit', edit_context_workspace_task_status_path(@workspace.context, @workspace, @task_status)
 \|
-= link_to 'Back', project_context_task_statuses_path(@context.project, @context)
+= link_to 'Back', context_workspace_task_statuses_path(@workspace.context, @workspace)
