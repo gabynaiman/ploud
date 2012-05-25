@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_filter :load_workspace
 
   def index
-    @tasks = @workspace.tasks.search(params[:query]).result.priorized.ordered.page(params[:page])
+    @tasks = @workspace.tasks.search(params[:query]).result.priorized.due_dates.ordered.page(params[:page])
   end
 
   def show

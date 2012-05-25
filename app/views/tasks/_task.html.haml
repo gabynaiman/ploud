@@ -1,5 +1,6 @@
 %tr
   %td= task.name
+  %td= distance_of_time_in_words_to_now(task.due_date) if task.due_date
   %td= select_tag :priority,
                   options_for_select(([''] + (1..9).map{|i| i.to_s}), :selected => task.priority),
                   :data => {:remote => true, :url => update_priority_context_workspace_task_path(@workspace.context, @workspace, task, :query => params[:query]), :method => :put}

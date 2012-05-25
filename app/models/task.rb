@@ -11,6 +11,7 @@ class Task < ActiveRecord::Base
 
   scope :ordered, order{lower name}
   scope :priorized, (ActiveRecord::Base.connection.adapter_name == 'SQLite') ? order{(priority * -1).desc} : order(:priority)
+  scope :due_dates, (ActiveRecord::Base.connection.adapter_name == 'SQLite') ? order{(due_date * -1).desc} : order(:due_date)
   scope :drafts_of, lambda { |user| where(:workspace_id => nil).where(:created_by => user) }
   scope :todo, joins{task_status}.joins{workspace.context}.where{task_status.todo == true}
 
