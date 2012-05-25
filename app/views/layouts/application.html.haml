@@ -8,38 +8,42 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body{:style => 'margin-top: 0'}
+
+    %div{:style => 'border-bottom: 1px solid #000; padding: 3px 0px 3px 0px'}
+      %div{:style => 'display: inline-block; width: 50%;'}
+        = link_to 'Home', root_path
+        |
+        %span#classify_menu
+          - if Task.drafts_of(current_user).count > 0
+            = link_to raw("Classify (#{Task.drafts_of(current_user).count})"), drafts_path
+          - else
+            Classify
+        |
+        %span#todos_menu
+          - if Task.todo.count > 0
+            = link_to "Todos (#{Task.todo.count})", todos_path
+          - else
+            Todos
+        |
+        = link_to 'Organize', contexts_path
+        - if content_for? :breadcrumbs
+          = yield(:breadcrumbs)
+
+      %div{:style => 'display: inline-block'}
+        - if user_signed_in?
+          = form_for :draft, :url => drafts_path, :remote => true, :html => {:style => 'display: inline-block'} do |f|
+            = f.text_field :name, :placeholder => 'New task', :style => 'width: 350px'
+            = f.submit '+'
+          |
+          = current_user.email
+          |
+          = link_to('Sign out', destroy_user_session_path, :method => :delete)
+        - else
+          = link_to('Sign in', new_user_session_path)
+
     #flash{:style => 'display: none; position: absolute; top: 33px; background-color: #fafafa; padding: 2px 10px 2px 10px'}
       = show_flash
-    %table{:style => 'width: 100%; border-bottom: 1px solid #000'}
-      %tr
-        %td
-          = link_to 'Home', root_path
-          |
-          %span#classify_menu
-            - if Task.drafts_of(current_user).count > 0
-              = link_to raw("Classify (#{Task.drafts_of(current_user).count})"), drafts_path
-            - else
-              Classify
-          |
-          %span#todos_menu
-            - if Task.todo.count > 0
-              = link_to "Todos (#{Task.todo.count})", todos_path
-            - else
-              Todos
-          |
-          = link_to 'Organize', contexts_path
-          - if content_for? :breadcrumbs
-            = yield(:breadcrumbs)
-        %td{:style => 'text-align: right'}
-          - if user_signed_in?
-            = form_for :draft, :url => drafts_path, :remote => true, :html => {:style => 'display: inline-block'} do |f|
-              = f.text_field :name, :placeholder => 'New task', :style => 'width: 500px'
-              = f.submit '+'
-            |
-            = current_user.email
-            |
-            = link_to('Sign out', destroy_user_session_path, :method => :delete)
-          - else
-            = link_to('Sign in', new_user_session_path)
+
+
     %div{:style => 'margin-top: 25px'}
       = yield
