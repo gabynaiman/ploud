@@ -5,9 +5,9 @@
       %li
         %strong= link_to workspace.name, [context, workspace]
         %ul
-          - workspace.tasks.todo.ordered.each do |task|
+          - workspace.tasks.todo.priorized.ordered.each do |task|
             %li
-              = link_to task.name, [context, workspace, task]
+              = link_to "#{task.priority ? "[#{task.priority}] " : ''}#{task.name}", [context, workspace, task]
               = select_tag :task_status_id,
                            options_for_select(workspace.task_statuses.ordered.map{|s| [s.name, s.id]}, :selected => task.task_status_id),
                            :data => {:remote => true, :url => update_status_todo_path(task), :method => :put}
