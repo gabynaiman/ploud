@@ -17,6 +17,9 @@
   .field
     = f.label :priority
     = f.number_field :priority
+  .field
+    = f.label :due_date
+    = f.datetime_select :due_date, :prompt => true
   - unless @task.new_record?
     .field
       = f.label :workspace_id
@@ -24,8 +27,5 @@
     .field
       = f.label :task_status_id
       = f.select :task_status_id, @workspace.task_statuses.ordered.map{|s| [s.name, s.id]}
-    .field
-      = f.label :due_date
-      = f.datetime_select :due_date, :prompt => true
   .actions
     = f.submit 'Save'
